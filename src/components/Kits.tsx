@@ -318,7 +318,7 @@ const Kits = () => {
                   componentRestrictions: { country: "us" },
                 }}
                 className="w-full p-2 border mantine-TextInput-input border-gray-300 rounded"
-                placeholder="e.g., 73 Robert St"
+                placeholder="e.g., 1313 Missing Sock Blvd"
               />
             </div>
             <TextInput
@@ -334,7 +334,7 @@ const Kits = () => {
               <TextInput
                 value={newLocationObj?.city}
                 label="City"
-                placeholder="e.g., Salt Lake City"
+                placeholder="e.g., Looneyburg"
                 error={errors.city}
                 onChange={(e) => {
                   handleLocalInputChange("city", e.target.value);
@@ -347,14 +347,14 @@ const Kits = () => {
                 onChange={(e) => {
                   handleLocalInputChange("state", e);
                 }}
-                placeholder="e.g., Utah"
+                placeholder="e.g., Florida"
                 data={stateData}
               />
             </div>
             <TextInput
               value={newLocationObj?.zipCode}
               label="Zip Code"
-              placeholder="e.g., 84101"
+              placeholder="e.g., 86753"
               onChange={(e) => {
                 handleLocalInputChange("zipCode", e.target.value);
               }}

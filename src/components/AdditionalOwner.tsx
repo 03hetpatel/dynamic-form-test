@@ -196,9 +196,9 @@ const AdditionalOwner = () => {
                         className="w-full"
                         placeholder={
                           field === "fullName"
-                            ? "e.g., John Doe"
+                            ? "e.g., Ben N. Cloth"
                             : field === "email"
-                            ? "e.g., johndoe@primeivhydration.com"
+                            ? "e.g., whostolemypants@nomorelaundry.toon"
                             : field === "phone"
                             ? "(XXX)-XXX-XXXX"
                             : ""

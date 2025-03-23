@@ -231,7 +231,7 @@ const MultipleProvider = () => {
                   label="Full Name"
                   value={provider.providerFullName}
                   error={errors[index]?.providerFullName}
-                  placeholder="e.g., John Doe"
+                  placeholder="e.g., Ben N. Cloth"
                   onChange={(e) =>
                     handleProviderChange(
                       index,
@@ -244,7 +244,7 @@ const MultipleProvider = () => {
                   label="Email Address"
                   value={provider.email}
                   error={errors[index]?.email}
-                  placeholder="e.g., johndoe@primeivhydration.com"
+                  placeholder="e.g., whostolemypants@nomorelaundry.toon"
                   onChange={(e) =>
                     handleProviderChange(index, "email", e.target.value)
                   }
