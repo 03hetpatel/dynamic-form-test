@@ -49,7 +49,7 @@ const EmailAddress = () => {
   return (
     <div className="container-home bg-main">
       <div className="px-10">
-        <Heading text="Franchise Owner's Email Address" />
+        <Heading text="Practice Owner's Email" />
         <div className="mb-5">
           <TextInput
             type="email"

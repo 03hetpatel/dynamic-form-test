@@ -212,7 +212,7 @@ const MultipleProvider = () => {
       <div className="px-10 max-[450px]:px-3">
         <Heading text="Provider(s) Information" />
         <div className="text-white text-base max-[450px]:text-sm text-center pb-3">
-          Enter the details of the provider working at your franchise. If you
+          Enter the details of the provider working at your practice. If you
           have more than one provider, click '+ Add More Provider(s)' to include
           additional providers.
         </div>

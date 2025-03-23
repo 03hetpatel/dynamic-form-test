@@ -168,11 +168,11 @@ const AdditionalOwner = () => {
   return (
     <div className="container-home bg-main">
       <div className="px-10 max-[450px]:px-3">
-        <Heading text="Additional Franchise Owner(s) Information" />
+        <Heading text="Additional Practice Owner(s) Information" />
         <div className="text-white text-base max-[450px]:text-sm text-center pb-3">
           Since you selected 'More Than One Owner,' please enter the second
           owner's details below. If there are additional owners, click '+ Add
-          More Franchise Owner(s)' to include them.
+          More Practice Owner(s)' to include them.
         </div>
         <div className="max-h-[calc(100vh-450px)] overflow-auto pr-3">
           {(owners as IOwnerDetails[]).map((owner, index) => (
