@@ -37,7 +37,7 @@ const FullName = () => {
           <TextInput
             value={formData?.fullName}
             error={errors?.fullName}
-            placeholder="e.g., John Doe"
+            placeholder="e.g., Ben N. Cloth"
             onChange={(e) => {
               handleInputChange("fullName", e.target.value);
               clearError("fullName");

@@ -43,31 +43,31 @@ const MultipleLocations: React.FC = () => {
     },
     validate: {
       locations: {
-        locationName: (value: string) =>
-          !value ? "Location name is required." : null,
+        // locationName: (value: string) =>
+        //   !value ? "Location name is required." : null,
 
-        locationIdentifier: (value: string, values) => {
-          if (!value) {
-            return "Location identifier is required.";
-          }
+        // locationIdentifier: (value: string, values) => {
+        //   if (!value) {
+        //     return "Location identifier is required.";
+        //   }
 
-          if (!values.locations || !Array.isArray(values.locations)) {
-            return null;
-          }
+        //   if (!values.locations || !Array.isArray(values.locations)) {
+        //     return null;
+        //   }
 
-          const identifiers = values.locations.map(
-            (loc) => loc.locationIdentifier
-          );
-          const duplicateCount = identifiers.filter(
-            (id) => id === value
-          ).length;
+        //   const identifiers = values.locations.map(
+        //     (loc) => loc.locationIdentifier
+        //   );
+        //   const duplicateCount = identifiers.filter(
+        //     (id) => id === value
+        //   ).length;
 
-          if (duplicateCount > 1) {
-            return "Duplicate Location Identifier is not allowed";
-          }
+        //   if (duplicateCount > 1) {
+        //     return "Duplicate Location Identifier is not allowed";
+        //   }
 
-          return null;
-        },
+        //   return null;
+        // },
 
         streetAddress: (value: string) =>
           !value ? "Address Line 1 is required." : null,
@@ -150,10 +150,10 @@ const MultipleLocations: React.FC = () => {
 
     const errors: string[] = [];
     form.values.locations.forEach((location, index) => {
-      if (!location.locationName)
-        errors.push(`Enter the location name for Location ${index + 1}`);
-      if (!location.locationIdentifier)
-        errors.push(`Enter the location identifier for Location ${index + 1}`);
+      // if (!location.locationName)
+      //   errors.push(`Enter the location name for Location ${index + 1}`);
+      // if (!location.locationIdentifier)
+      //   errors.push(`Enter the location identifier for Location ${index + 1}`);
       if (!location.streetAddress)
         errors.push(`Enter the address line 1 for Location ${index + 1}`);
       if (!location.city)
@@ -195,7 +195,7 @@ const MultipleLocations: React.FC = () => {
               }}
               className="p-3 container-card rounded-md my-5"
             >
-              <div className="grid max-[450px]:grid-cols-1 grid-cols-2 gap-x-5">
+              {/* <div className="grid max-[450px]:grid-cols-1 grid-cols-2 gap-x-5">
                 <TextInput
                   label="Location Name"
                   placeholder="e.g., Pleasant Grove"
@@ -208,7 +208,7 @@ const MultipleLocations: React.FC = () => {
                     `locations.${index}.locationIdentifier`
                   )}
                 />
-              </div>
+              </div> */}
 
               <div>
                 <div className="mantine-TextInput-label font-semibold text-sm">
@@ -224,7 +224,7 @@ const MultipleLocations: React.FC = () => {
                     componentRestrictions: { country: "us" },
                   }}
                   className="w-full p-2 border mantine-TextInput-input border-gray-300 rounded"
-                  placeholder="e.g., 73 Robert St"
+                  placeholder="e.g., 1313 Missing Sock Blvd"
                   {...form.getInputProps(`locations.${index}.streetAddress`)}
                 />
               </div>
@@ -237,13 +237,13 @@ const MultipleLocations: React.FC = () => {
               <div className="grid max-[450px]:grid-cols-1 grid-cols-2 gap-x-5">
                 <TextInput
                   label="City"
-                  placeholder="e.g., Salt Lake City"
+                  placeholder="e.g., Looneyburg"
                   {...form.getInputProps(`locations.${index}.city`)}
                 />
                 <Select
                   label="State"
                   {...form.getInputProps(`locations.${index}.state`)}
-                  placeholder="e.g., Utah"
+                  placeholder="e.g., Florida"
                   data={[
                     "Alabama",
                     "Alaska",
@@ -301,7 +301,7 @@ const MultipleLocations: React.FC = () => {
 
               <TextInput
                 label="Zip Code"
-                placeholder="e.g., 84101"
+                placeholder="e.g., 86753"
                 {...form.getInputProps(`locations.${index}.zipCode`)}
               />
 

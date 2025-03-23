@@ -55,7 +55,7 @@ const EmailAddress = () => {
             type="email"
             value={formData?.email}
             error={errors?.email}
-            placeholder="e.g., johndoe@primeivhydration.com"
+            placeholder="e.g., whostolemypants@nomorelaundry.toon"
             onChange={(e) => {
               handleInputChange("email", e.target.value);
               clearError("email");
