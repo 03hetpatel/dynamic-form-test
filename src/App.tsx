@@ -27,9 +27,9 @@ const App = () => {
   return (
     <AppContext.Provider value={{ step, setStep, formData, setFormData }}>
       <Routes>
-        <Route path="/prime-iv-onboarding" element={<Form />} />
+        <Route path="/brite-pracice-onboarding" element={<Form />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="*" element={<Navigate to="/prime-iv-onboarding" />} />
+        <Route path="*" element={<Navigate to="/brite-pracice-onboarding" />} />
       </Routes>
       <ToastContainer
         className="custom-toast-container"

@@ -33,7 +33,7 @@ const PaymentSuccess = () => {
     hasRun.current = true;
 
     if (!isSuccess || isSuccess === "false") {
-      window.location.href = "/prime-iv-onboarding";
+      window.location.href = "/brite-pracice-onboarding";
       setFormData({});
       sessionStorage.clear();
     } else {
