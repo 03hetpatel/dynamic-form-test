@@ -12,20 +12,30 @@ import AskMoreThanOneMember from "../components/AskMoreThanOneMember";
 import AdditioanlMembers from "../components/AdditioanlMembers";
 import CardVerification from "../components/CardVerification";
 import Kits from "../components/Kits";
+import PracticeName from "../components/PracticeName";
+import PracticeLogo from "../components/PracticeLogo";
+import FaxNumber from "../components/FaxNumber";
+import PricingModal from "../components/PricingModal";
+import Hormone from "../components/Hormone";
 
 export const components: { [key: number]: JSX.Element } = {
-  1: <FullName />,
-  2: <ContactNumber />,
-  3: <EmailAddress />,
-  4: <SoleOwner />,
-  5: <AdditionalOwner />,
-  6: <MultipleLocations />,
-  7: <MultipleProvider />,
-  8: <Kits />,
-  9: <OperationHubMessage />,
-  10: <AskMoreThanOneMember />,
-  11: <AdditioanlMembers />,
-  12: <CardVerification />,
+  1: <PracticeName />,
+  2: <PracticeLogo />,
+  3: <FaxNumber />,
+  4: <FullName />,
+  5: <ContactNumber />,
+  6: <EmailAddress />,
+  7: <SoleOwner />,
+  8: <AdditionalOwner />,
+  9: <MultipleLocations />,
+  10: <MultipleProvider />,
+  11: <Kits />,
+  12: <PricingModal />,
+  13: <Hormone />,
+  14: <OperationHubMessage />,
+  15: <AskMoreThanOneMember />,
+  16: <AdditioanlMembers />,
+  17: <CardVerification />,
 };
 
 export const totalSteps = Object.keys(components).length;

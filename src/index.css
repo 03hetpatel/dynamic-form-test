@@ -184,3 +184,7 @@
     margin-left: 0; /* or adjust accordingly */
   }
 }
+
+.text-color {
+  color: #d1d1d1 !important;
+}
