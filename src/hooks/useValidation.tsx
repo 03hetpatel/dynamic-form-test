@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 interface FormData {
+  practiceName: string;
   fullName: string;
   phone: string;
   email: string;
