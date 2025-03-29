@@ -5,7 +5,7 @@ interface FormData {
   fullName: string;
   phone: string;
   email: string;
-  faxNumber: string;
+  faxNumber?: string;
 }
 
 type ValidationRule = {

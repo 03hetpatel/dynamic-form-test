@@ -204,7 +204,7 @@ const MultipleProvider = () => {
       return;
     }
 
-    setStep(8);
+    setStep(11);
   };
 
   return (
@@ -295,7 +295,7 @@ const MultipleProvider = () => {
       </div>
       <Footer
         handleNextStep={handleNextStep}
-        handlePreviousStep={() => setStep(6)}
+        handlePreviousStep={() => setStep(9)}
       />
     </div>
   );

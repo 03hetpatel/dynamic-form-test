@@ -295,7 +295,7 @@ const Kits = () => {
       return;
     }
     // formData.kits is already updated via the useEffect on kitEntries
-    setStep(9);
+    setStep(12);
   };
 
   return (
@@ -437,7 +437,7 @@ const Kits = () => {
       </div>
       <Footer
         handleNextStep={handleNext}
-        handlePreviousStep={() => setStep(7)}
+        handlePreviousStep={() => setStep(10)}
       />
     </div>
   );

@@ -175,7 +175,7 @@ const MultipleLocations: React.FC = () => {
       showToast(errorArr[0], "error");
       return;
     }
-    setStep(7);
+    setStep(10);
   };
 
   return (
@@ -334,9 +334,9 @@ const MultipleLocations: React.FC = () => {
         handleNextStep={handleNextStep}
         handlePreviousStep={() => {
           if (formData.isSoleOwner) {
-            setStep(4);
+            setStep(7);
           } else {
-            setStep(5);
+            setStep(8);
           }
         }}
       />

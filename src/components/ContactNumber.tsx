@@ -70,7 +70,7 @@ const ContactNumber: React.FC = () => {
     const isValid = validateFields({ ...formData, phone: rawPhone }); // Validate first
 
     if (isValid) {
-      setStep(3);
+      setStep(6);
     }
   };
 
@@ -91,7 +91,7 @@ const ContactNumber: React.FC = () => {
       </div>
       <Footer
         handleNextStep={handleNextStep}
-        handlePreviousStep={() => setStep(1)}
+        handlePreviousStep={() => setStep(4)}
       />
     </div>
   );

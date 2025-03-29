@@ -156,7 +156,7 @@ const AdditionalOwner = () => {
     });
 
     setErrors(newErrors);
-    if (isValid) setStep(6);
+    if (isValid) setStep(9);
   };
 
   useEffect(() => {
@@ -240,7 +240,7 @@ const AdditionalOwner = () => {
       </div>
       <Footer
         handleNextStep={handleNext}
-        handlePreviousStep={() => setStep(4)}
+        handlePreviousStep={() => setStep(7)}
       />
     </div>
   );

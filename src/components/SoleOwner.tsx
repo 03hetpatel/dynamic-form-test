@@ -20,7 +20,7 @@ const SoleOwner = () => {
         <Button
           onClick={() => {
             handleOwnerType(true);
-            setStep(6);
+            setStep(9);
           }}
           variant="outline"
           className="!px-10 !text-lg !h-[52px] hover:!bg-[#45bda709] !border-[#45bda6] !text-[#45bda6] !border-[3px]"
@@ -30,7 +30,7 @@ const SoleOwner = () => {
         <Button
           onClick={() => {
             handleOwnerType(false);
-            setStep(5);
+            setStep(8);
           }}
           variant="outline"
           className="!px-10 !text-lg !h-[52px] hover:!bg-[#45bda709] !border-[#45bda6] !text-[#45bda6] !border-[3px]"
@@ -42,7 +42,7 @@ const SoleOwner = () => {
       <Footer
         handleNextStep={() => {}}
         handlePreviousStep={() => {
-          setStep(3);
+          setStep(6);
         }}
       />
     </div>

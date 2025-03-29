@@ -42,7 +42,7 @@ const EmailAddress = () => {
 
     // Proceed if validation passes
     if (validateFields(formData)) {
-      setStep(4);
+      setStep(7);
     }
   };
 
@@ -66,7 +66,7 @@ const EmailAddress = () => {
       <Footer
         handleNextStep={handleNextStep}
         handlePreviousStep={() => {
-          setStep(2);
+          setStep(5);
         }}
       />
     </div>

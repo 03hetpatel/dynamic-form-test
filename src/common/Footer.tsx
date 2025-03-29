@@ -87,7 +87,7 @@ const Footer = ({ handleNextStep, handlePreviousStep }: IFooterProps) => {
         </div>
 
         <div>
-          {step !== totalSteps + 1 && step !== 10 && step !== 16 && (
+          {step !== totalSteps + 1 && step !== 7 && (
             <button
               onClick={
                 step === totalSteps ? handleStripeCheckout : handleNextStep
