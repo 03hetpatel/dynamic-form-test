@@ -87,31 +87,22 @@ const Footer = ({ handleNextStep, handlePreviousStep }: IFooterProps) => {
         </div>
 
         <div>
-          {step !== totalSteps + 1 &&
-            step !== 4 &&
-            step !== 10 &&
-            step !== 16 && (
-              <button
-                onClick={
-                  step === totalSteps ? handleStripeCheckout : handleNextStep
-                }
-                disabled={loading}
-                className={`flex bg-[#4FB4A5]  px-3 sm:px-7 rounded-xl py-3 items-center gap-1 cursor-pointer jiggle-right ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                <div className="tracking-widest text-sm font-bold sm:text-lg">
-                  {loading
-                    ? "Loading..."
-                    : step === totalSteps
-                    ? "NEXT"
-                    : "NEXT"}
-                </div>
-                {!loading && (
-                  <FaArrowRight className="mt-0.5 mx-1 arrow-right" />
-                )}
-              </button>
-            )}
+          {step !== totalSteps + 1 && step !== 10 && step !== 16 && (
+            <button
+              onClick={
+                step === totalSteps ? handleStripeCheckout : handleNextStep
+              }
+              disabled={loading}
+              className={`flex bg-[#4FB4A5]  px-3 sm:px-7 rounded-xl py-3 items-center gap-1 cursor-pointer jiggle-right ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              <div className="tracking-widest text-sm font-bold sm:text-lg">
+                {loading ? "Loading..." : step === totalSteps ? "NEXT" : "NEXT"}
+              </div>
+              {!loading && <FaArrowRight className="mt-0.5 mx-1 arrow-right" />}
+            </button>
+          )}
         </div>
       </div>
     </div>

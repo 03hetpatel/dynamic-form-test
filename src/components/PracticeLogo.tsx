@@ -41,7 +41,9 @@ const PracticeLogo = () => {
         </div>
       </div>
       <Footer
-        handleNextStep={() => {}}
+        handleNextStep={() => {
+          setStep(3);
+        }}
         handlePreviousStep={() => {
           setStep(1);
         }}

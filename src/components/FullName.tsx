@@ -25,7 +25,7 @@ const FullName = () => {
 
   const handleNextStep = () => {
     if (validateFields(formData)) {
-      setStep(2);
+      setStep(5);
     }
   };
 
@@ -45,7 +45,12 @@ const FullName = () => {
           />
         </div>
       </div>
-      <Footer handleNextStep={handleNextStep} handlePreviousStep={() => {}} />
+      <Footer
+        handleNextStep={handleNextStep}
+        handlePreviousStep={() => {
+          setStep(3);
+        }}
+      />
     </div>
   );
 };
