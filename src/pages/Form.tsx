@@ -20,7 +20,7 @@ const Form = () => {
       <div className="relative z-10">{component}</div>
 
       {/* Stepper Component */}
-      <div className="absolute max-[450px]:hidden bottom-2 w-screen max-w-[1150px] flex justify-center">
+      <div className="absolute max-[550px]:hidden bottom-2 w-screen max-w-[1150px] flex justify-center">
         <Stepper
           activeStep={step - 1} // Convert step to 0-based index
           className="absolute bottom-6 w-screen max-w-[1150px] flex justify-center"
