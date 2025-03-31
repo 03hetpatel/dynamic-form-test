@@ -43,32 +43,6 @@ const MultipleLocations: React.FC = () => {
     },
     validate: {
       locations: {
-        // locationName: (value: string) =>
-        //   !value ? "Location name is required." : null,
-
-        // locationIdentifier: (value: string, values) => {
-        //   if (!value) {
-        //     return "Location identifier is required.";
-        //   }
-
-        //   if (!values.locations || !Array.isArray(values.locations)) {
-        //     return null;
-        //   }
-
-        //   const identifiers = values.locations.map(
-        //     (loc) => loc.locationIdentifier
-        //   );
-        //   const duplicateCount = identifiers.filter(
-        //     (id) => id === value
-        //   ).length;
-
-        //   if (duplicateCount > 1) {
-        //     return "Duplicate Location Identifier is not allowed";
-        //   }
-
-        //   return null;
-        // },
-
         streetAddress: (value: string) =>
           !value ? "Address Line 1 is required." : null,
 
@@ -150,10 +124,6 @@ const MultipleLocations: React.FC = () => {
 
     const errors: string[] = [];
     form.values.locations.forEach((location, index) => {
-      // if (!location.locationName)
-      //   errors.push(`Enter the location name for Location ${index + 1}`);
-      // if (!location.locationIdentifier)
-      //   errors.push(`Enter the location identifier for Location ${index + 1}`);
       if (!location.streetAddress)
         errors.push(`Enter the address line 1 for Location ${index + 1}`);
       if (!location.city)
@@ -164,11 +134,40 @@ const MultipleLocations: React.FC = () => {
         errors.push(`Enter the zip code for Location ${index + 1}`);
     });
 
+    // Build a map to track addresses and the indices where they appear
+    const addressMap: Record<string, number[]> = {};
+    form.values.locations.forEach((location, index) => {
+      const addr = location.streetAddress.trim();
+      if (addr) {
+        if (addressMap[addr]) {
+          addressMap[addr].push(index + 1);
+        } else {
+          addressMap[addr] = [index + 1];
+        }
+      }
+    });
+
+    // Gather any duplicate addresses with their respective indices
+    const duplicateErrors: string[] = [];
+    Object.keys(addressMap).forEach((addr) => {
+      if (addressMap[addr].length > 1) {
+        duplicateErrors.push(
+          `Duplicate address "${addr}" found for Location ${addressMap[
+            addr
+          ].join(" and ")}.`
+        );
+      }
+    });
+
+    if (duplicateErrors.length > 0) {
+      showToast(duplicateErrors.join(" "), "error");
+      return;
+    }
+
     if (errors.length > 0) {
       showToast(errors[0], "error");
       return;
     }
-
     if (isvalid.hasErrors) {
       const errorArr = Object.values(isvalid.errors).map((error) => error);
       console.log(errorArr, "====errorArr");
