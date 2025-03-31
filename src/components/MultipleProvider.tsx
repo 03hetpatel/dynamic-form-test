@@ -217,7 +217,7 @@ const MultipleProvider = () => {
           additional providers.
         </div>
 
-        <div className="max-h-[calc(100vh-450px)] overflow-auto pr-3">
+        <div className="max-h-[calc(100vh-500px)] overflow-auto pr-3">
           {providers.map((provider: any, index: number) => (
             <div
               key={index}

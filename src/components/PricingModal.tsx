@@ -10,7 +10,7 @@ const PricingModal = () => {
       <div className="px-10 max-[450px]:px-3">
         <Heading text="BRITE Pricing Model" />
         <div>
-          <div className="max-h-[calc(100vh-320px)] overflow-auto pr-3 mb-5">
+          <div className="max-h-[calc(100vh-370px)] overflow-auto pr-3 mb-5">
             <div className="p-3 rounded container-card my-5 space-y-5">
               <div className="bg-[#e5e7ea] p-5 space-y-2 max-w-[900px] mx-auto">
                 <div className="text-lg sm:text-xl font-bold">

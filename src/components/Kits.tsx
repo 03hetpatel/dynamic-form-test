@@ -382,7 +382,7 @@ const Kits = () => {
         </div>
         <div
           ref={kitEntriesContainerRef}
-          className="max-h-[calc(100vh-450px)] overflow-auto pr-3"
+          className="max-h-[calc(100vh-525px)] overflow-auto pr-3"
         >
           {kitEntries.map((entry, index) => (
             <div key={index} className="p-3 rounded container-card my-5">
