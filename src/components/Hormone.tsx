@@ -6,15 +6,14 @@ import useInputChange from "../hooks/useInputChange";
 import { showToast } from "../common/toast";
 
 const Hormone = () => {
-  const { setStep, formData } = useContext(AppContext);
-  const [selectedOption, setSelectedOption] = useState<string | null>(
-    formData?.hormone ?? null
-  );
+  const { setStep } = useContext(AppContext);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const handleInputChange = useInputChange();
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     handleInputChange("hormone", option);
+    setStep(14);
   };
 
   return (
