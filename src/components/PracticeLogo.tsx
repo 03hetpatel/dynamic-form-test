@@ -5,16 +5,22 @@ import AppContext from "../context/AppContext";
 import { Dropzone } from "@mantine/dropzone";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { Button } from "@mantine/core";
+import useInputChange from "../hooks/useInputChange";
 
 const PracticeLogo = () => {
   const { setStep } = useContext(AppContext);
+  const handleInputChange = useInputChange();
 
   return (
     <div className="container-home bg-main">
       <div className="px-10">
         <Heading text="Upload your Practice Logo" />
         <div className="mb-5">
-          <Dropzone onDrop={() => {}}>
+          <Dropzone
+            onDrop={(val) => {
+              handleInputChange("logo", val);
+            }}
+          >
             <div className="md:flex grid items-center justify-between gap-5 py-5">
               <div className="flex items-center gap-3">
                 <AiOutlineCloudUpload size={60} className="text-[#45bda6]" />
