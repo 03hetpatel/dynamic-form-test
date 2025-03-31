@@ -24,7 +24,7 @@ const MultipleProvider = () => {
   const locationOptions = (
     (formData.locations as ILocationDetails[]) || []
   ).map((location) => ({
-    value: location?.locationIdentifier,
+    value: location?.streetAddress,
     label: location?.streetAddress,
   }));
 
