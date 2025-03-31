@@ -67,7 +67,7 @@ const MultipleProvider = () => {
     if (field === "selectedLocations") {
       const selectedFullLocations = value.map((selectedLocation: string) => {
         return formData.locations.find(
-          (location: any) => location.locationIdentifier === selectedLocation
+          (location: any) => location.streetAddress === selectedLocation
         );
       });
       updatedProviders[index].selectedFullLocations = selectedFullLocations;

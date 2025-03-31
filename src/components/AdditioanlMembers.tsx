@@ -65,7 +65,7 @@ const AdditionalMembers = () => {
       updatedMembers[index].selectedFullLocations = value.map(
         (selectedLocation: string) =>
           formData.locations.find(
-            (location: any) => location.locationIdentifier === selectedLocation
+            (location: any) => location.streetAddress === selectedLocation
           )
       );
     }

@@ -20,7 +20,7 @@ const ProviderLocation = () => {
       const selectedLocations = formData.selectedLocations.map(
         (selectedLocation: any) => {
           const location = formData.locations.find(
-            (location: any) => location.locationIdentifier === selectedLocation
+            (location: any) => location.streetAddress === selectedLocation
           );
           return location;
         }
