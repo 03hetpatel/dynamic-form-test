@@ -37,6 +37,11 @@ const Kits = () => {
       Array.isArray(formData.kits) &&
       formData.kits.length > 0
       ? formData.kits
+      : formData?.providers?.length > 0
+      ? formData.providers.map((provider: IProvider) => ({
+          shippingProvider: provider?.providerFullName,
+          shippingLocation: "",
+        }))
       : [{ shippingProvider: "", shippingLocation: "" }];
   });
   const [kitEntryErrors, setKitEntryErrors] = useState<IKitEntryErrors[]>([{}]);
@@ -90,8 +95,6 @@ const Kits = () => {
 
     setShippingLocation(uniqueAddresses);
   }, [formData?.shippingFullLocations, formData?.locations]);
-  
-  
 
   // When kitEntries length increases, scroll the container to the bottom smoothly
   useEffect(() => {
@@ -297,6 +300,8 @@ const Kits = () => {
     // formData.kits is already updated via the useEffect on kitEntries
     setStep(12);
   };
+
+  console.log(formData, "==formData");
 
   return (
     <div className="container-home bg-main">
