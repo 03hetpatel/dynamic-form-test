@@ -26,14 +26,14 @@ const Hormone = () => {
           team members who will need access to the Operations Hub. Click '+ Add
           More Member(s)' to include additional team members as needed.
         </div>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <button
             onClick={() => handleOptionSelect("Shipping Only")}
-            className={`!px-5 ${
+            className={`!px-2 sm:!px-5 ${
               selectedOption === "Shipping Only"
                 ? "!bg-[#45bda6] !text-black"
                 : ""
-            } cursor-pointer rounded-xl text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 mt-5 max-[450px]:!text-sm max-[450px]:!h-[40px]`}
+            } cursor-pointer rounded-xl sm:text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 md:mt-5 max-[450px]:!text-sm max-[450px]:!min-h-[40px]`}
           >
             Shipping Only
           </button>
@@ -41,11 +41,11 @@ const Hormone = () => {
             onClick={() => {
               handleOptionSelect("Other Medications Only");
             }}
-            className={`!px-5 ${
+            className={`!px-2 sm:!px-5 ${
               selectedOption === "Other Medications Only"
                 ? "!bg-[#45bda6] !text-black"
                 : ""
-            } cursor-pointer rounded-xl text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 mt-5 max-[450px]:!text-sm max-[450px]:!h-[40px]`}
+            } cursor-pointer rounded-xl sm:text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 md:mt-5 max-[450px]:!text-sm max-[450px]:!min-h-[40px]`}
           >
             Other Medications Only
           </button>
@@ -53,11 +53,11 @@ const Hormone = () => {
             onClick={() => {
               handleOptionSelect("Both Medications & Shipping");
             }}
-            className={`!px-5 ${
+            className={`!px-2 sm:!px-5 ${
               selectedOption === "Both Medications & Shipping"
                 ? "!bg-[#45bda6] !text-black"
                 : ""
-            } cursor-pointer rounded-xl text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 mt-5 max-[450px]:!text-sm max-[450px]:!h-[40px]`}
+            } cursor-pointer rounded-xl sm:text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 md:mt-5 max-[450px]:!text-sm max-[450px]:!min-h-[40px]`}
           >
             Both Medications & Shipping
           </button>
@@ -65,11 +65,11 @@ const Hormone = () => {
             onClick={() => {
               handleOptionSelect("Neither (Patient Pays for Everything)");
             }}
-            className={`!px-5 ${
+            className={`!px-2 sm:!px-5 ${
               selectedOption === "Neither (Patient Pays for Everything)"
                 ? "!bg-[#45bda6] !text-black"
                 : ""
-            } cursor-pointer rounded-xl text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 mt-5 max-[450px]:!text-sm max-[450px]:!h-[40px]`}
+            } cursor-pointer rounded-xl sm:text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 md:mt-5 max-[450px]:!text-sm max-[450px]:!min-h-[40px]`}
           >
             Neither (Patient Pays for Everything)
           </button>
