@@ -68,13 +68,13 @@ const OperationHubMessage = () => {
       <Footer
         handleNextStep={() => {
           isChecked
-            ? setStep(10)
+            ? setStep(15)
             : showToast(
                 "Please acknowledge that you have read and understand the purpose of the Operations Hub before proceeding",
                 "error"
               );
         }}
-        handlePreviousStep={() => setStep(8)}
+        handlePreviousStep={() => setStep(13)}
       />
     </div>
   );

@@ -171,7 +171,7 @@ const AdditionalMembers = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      setStep(12);
+      setStep(17);
     }
   };
 
@@ -284,7 +284,7 @@ const AdditionalMembers = () => {
       </div>
       <Footer
         handleNextStep={handleNextStep}
-        handlePreviousStep={() => setStep(10)}
+        handlePreviousStep={() => setStep(15)}
       />
     </div>
   );

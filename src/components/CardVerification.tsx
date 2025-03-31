@@ -40,9 +40,9 @@ const CardVerification = () => {
         handleNextStep={() => {}}
         handlePreviousStep={() => {
           if (formData.isMultipleMember) {
-            setStep(11);
+            setStep(16);
           } else {
-            setStep(10);
+            setStep(15);
           }
         }}
       />
