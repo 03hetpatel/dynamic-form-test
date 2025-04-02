@@ -10,22 +10,50 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Manually parse the request body
+  let rawBody = "";
   try {
-    // Always use POST when forwarding to the Apps Script endpoint
-    const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbzyclRmJ9UWEPjWa5Yspe_5J8fOhwKDwszpm2jBLyrdM5M8RBxEgI8shqtW2z-WU7KPgA/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(req.body),
-      }
-    );
+    rawBody = await new Promise((resolve, reject) => {
+      let data = "";
+      req.on("data", (chunk) => {
+        data += chunk;
+      });
+      req.on("end", () => {
+        resolve(data);
+      });
+      req.on("error", (err) => {
+        reject(err);
+      });
+    });
+  } catch (err) {
+    res.status(400).json({ error: "Error reading request body" });
+    return;
+  }
+
+  let parsedBody;
+  try {
+    parsedBody = JSON.parse(rawBody);
+  } catch (err) {
+    res.status(400).json({ error: "Invalid JSON" });
+    return;
+  }
+
+  // Forward the request to your Apps Script endpoint
+  const deployedUrl =
+    "https://script.google.com/macros/s/AKfycbzyclRmJ9UWEPjWa5Yspe_5J8fOhwKDwszpm2jBLyrdM5M8RBxEgI8shqtW2z-WU7KPgA/exec";
+
+  try {
+    const response = await fetch(deployedUrl, {
+      method: "POST", // Always use POST for the upload
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(parsedBody),
+    });
 
     const data = await response.text();
 
-    // Add CORS header for the client
+    // Pass along the CORS header
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(response.status).send(data);
   } catch (error) {
