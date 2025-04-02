@@ -7,9 +7,6 @@ import Heading from "../common/Heading";
 import AppContext from "../context/AppContext";
 import useInputChange from "../hooks/useInputChange";
 
-const deployedUrl =
-  "https://script.google.com/macros/s/AKfycbzyclRmJ9UWEPjWa5Yspe_5J8fOhwKDwszpm2jBLyrdM5M8RBxEgI8shqtW2z-WU7KPgA/exec";
-
 const PracticeLogo: React.FC = () => {
   const { setStep } = useContext(AppContext);
   const handleInputChange = useInputChange();
@@ -17,7 +14,6 @@ const PracticeLogo: React.FC = () => {
   const [fileUrl, setFileUrl] = useState("");
 
   console.log(fileUrl, "====fileUrl");
-  // const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -29,24 +25,23 @@ const PracticeLogo: React.FC = () => {
     reader.readAsDataURL(selectedFile);
     reader.onload = async () => {
       if (typeof reader.result === "string") {
-        const base64File = reader.result.split(",")[1]; // Extract the base64 part
-        const requestBody = JSON.stringify({
+        const base64File = reader.result.split(",")[1]; // Extract base64 content
+        const requestBody = {
           filename: selectedFile.name,
           mimetype: selectedFile.type,
           fileData: base64File,
-        });
+        };
 
         try {
-          const response = await fetch(deployedUrl, {
+          const response = await fetch("/api/proxy", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: requestBody,
+            body: JSON.stringify(requestBody),
           });
 
           if (!response.ok) {
-            console.error("Response not OK:", response.statusText);
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
 
@@ -60,6 +55,7 @@ const PracticeLogo: React.FC = () => {
       }
     };
   };
+  
 
   return (
     <div className="container-home bg-main">
