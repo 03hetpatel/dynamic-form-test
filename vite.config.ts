@@ -8,4 +8,9 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  server: {
+    allowedHosts: [
+      "5173-jatinpanesi-dynamicform-s2ga0u6e8br.ws-us118.gitpod.io",
+    ],
+  },
 });

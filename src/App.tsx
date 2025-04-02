@@ -16,6 +16,7 @@ const App = () => {
     return savedFormData ? JSON.parse(savedFormData) : {};
   });
 
+  console.log(formData,'===formData===')
   useEffect(() => {
     sessionStorage.setItem("step", String(step));
   }, [step]);
