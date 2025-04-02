@@ -17,6 +17,7 @@
     "@stripe/react-stripe-js": "^3.3.0",
     "@stripe/stripe-js": "^5.10.0",
     "@tailwindcss/vite": "^4.0.6",
+    "gapi-script": "^1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-form-stepper": "^2.0.3",
