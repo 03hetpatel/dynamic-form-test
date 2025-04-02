@@ -20,7 +20,7 @@ const PracticeLogo: React.FC = () => {
       alert("Please select a file");
       return;
     }
-
+  
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onload = async () => {
