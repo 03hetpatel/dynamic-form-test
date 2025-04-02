@@ -17,7 +17,7 @@ const PracticeLogo: React.FC = () => {
   const [fileUrl, setFileUrl] = useState("");
 
   console.log(fileUrl, "====fileUrl");
-  const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
+  // const corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -37,7 +37,7 @@ const PracticeLogo: React.FC = () => {
         });
 
         try {
-          const response = await fetch(corsProxyUrl + deployedUrl, {
+          const response = await fetch(deployedUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
