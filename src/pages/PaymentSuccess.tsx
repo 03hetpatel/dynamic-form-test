@@ -1,13 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { Loader } from "@mantine/core";
 
 const PaymentSuccess = () => {
   const { formData, setFormData } = useContext(AppContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleUpload = async () => {
-    const selectedFile = formData.logo; // Assuming logo is the file input in formData
+  // Function to handle file upload
+  const handleUpload = async (): Promise<string | undefined> => {
+    const selectedFile = formData.logo; // logo should be our stored file data object
     if (!selectedFile) {
       alert("Please select a file");
       return;
@@ -16,7 +17,6 @@ const PaymentSuccess = () => {
     let base64File = "";
     // Check if selectedFile is a File (Blob) or our stored object.
     if (selectedFile instanceof File) {
-      // If it's a File, use FileReader to get the data URL.
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
       base64File = await new Promise<string>((resolve, reject) => {
@@ -30,7 +30,6 @@ const PaymentSuccess = () => {
         reader.onerror = reject;
       });
     } else if ("dataUrl" in selectedFile) {
-      // If it's our stored file data, extract base64 content directly.
       base64File = selectedFile.dataUrl.split(",")[1];
     } else {
       alert("Invalid file object");
@@ -38,8 +37,8 @@ const PaymentSuccess = () => {
     }
 
     const requestBody = {
-      filename: typeof selectedFile === "object" ? selectedFile.name : "",
-      mimetype: typeof selectedFile === "object" ? selectedFile.type : "",
+      filename: selectedFile.name || "",
+      mimetype: selectedFile.type || "",
       fileData: base64File,
     };
 
@@ -63,76 +62,69 @@ const PaymentSuccess = () => {
       alert("Upload failed: " + error.message);
     }
   };
-  const sendData = async () => {
-    const scriptURL = import.meta.env.VITE_SCRIPT_URI;
-
-    setLoading(true);
-    try {
-      const fileUrl = await handleUpload();
-      const updatedFormData = { ...formData, logo: fileUrl };
-      console.log(updatedFormData, "===updatedFormData===");
-      await fetch(scriptURL, {
-        method: "POST",
-        mode: "no-cors", // Prevents CORS errors
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedFormData),
-      });
-      sessionStorage.setItem("isSuccess", "false");
-      sessionStorage.setItem("step", "1");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Error submitting form.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const isSuccess = sessionStorage.getItem("isSuccess");
-
-  const hasRun = useRef(false);
 
   useEffect(() => {
-    if (hasRun.current) return;
-    hasRun.current = true;
+    // Read the success flag from session storage
+    const isSuccess = sessionStorage.getItem("isSuccess");
 
-    if (!isSuccess || isSuccess === "false") {
-      window.location.href = "/brite-pracice-onboarding";
+    if (isSuccess !== "true") {
+      // If payment wasn't successful, clear data and redirect to onboarding.
       setFormData({});
       sessionStorage.clear();
+      window.location.href = "/brite-pracice-onboarding";
     } else {
+      // If payment was successful, send the form data.
+      const sendData = async () => {
+        const scriptURL = import.meta.env.VITE_SCRIPT_URI; // your Apps Script URL
+        try {
+          const fileUrl = await handleUpload();
+          if (!fileUrl) return;
+          const updatedFormData = { ...formData, logo: fileUrl };
+          console.log("Updated Form Data:", updatedFormData);
+          await fetch(scriptURL, {
+            method: "POST",
+            mode: "no-cors", // Using no-cors because of Apps Script restrictions
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedFormData),
+          });
+          // Mark success as handled and redirect if needed.
+          sessionStorage.setItem("isSuccess", "false");
+          sessionStorage.setItem("step", "1");
+          window.location.href = "/confirmation"; // Redirect to a confirmation page
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          alert("Error submitting form.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
       sendData();
     }
-  }, [isSuccess, setFormData, sendData]);
+  }, [formData, setFormData]);
 
-  if (!isSuccess || isSuccess === "false") {
+  if (loading) {
     return (
       <div className="h-screen flex justify-center items-center">
         <Loader color="#45bda6" size="xl" type="dots" />
       </div>
     );
   }
+
   return (
     <div>
-      {loading ? (
-        <div className="h-screen flex justify-center items-center">
-          <Loader color="#45bda6" size="xl" type="dots" />
-        </div>
-      ) : (
-        <div>
-          <img
-            className="h-screen w-full object-cover max-[700px]:hidden"
-            src="./payment_success_desktop.jpg"
-            alt=""
-          />
-          <img
-            className="h-screen w-full object-cover min-[700px]:hidden"
-            src="./payment_success_mobile.jpg"
-            alt=""
-          />
-        </div>
-      )}
+      <img
+        className="h-screen w-full object-cover max-[700px]:hidden"
+        src="./payment_success_desktop.jpg"
+        alt="Payment Success Desktop"
+      />
+      <img
+        className="h-screen w-full object-cover min-[700px]:hidden"
+        src="./payment_success_mobile.jpg"
+        alt="Payment Success Mobile"
+      />
     </div>
   );
 };
