@@ -8,9 +8,11 @@ import AppContext from "../context/AppContext";
 import useInputChange from "../hooks/useInputChange";
 
 const PracticeLogo: React.FC = () => {
-  const { setStep } = useContext(AppContext);
+  const { setStep, formData } = useContext(AppContext);
   const handleInputChange = useInputChange();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(
+    formData?.logo || null
+  );
   const [fileUrl, setFileUrl] = useState("");
 
   console.log(fileUrl, "====fileUrl");
@@ -20,7 +22,7 @@ const PracticeLogo: React.FC = () => {
       alert("Please select a file");
       return;
     }
-  
+
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onload = async () => {
@@ -55,7 +57,6 @@ const PracticeLogo: React.FC = () => {
       }
     };
   };
-  
 
   return (
     <div className="container-home bg-main">
