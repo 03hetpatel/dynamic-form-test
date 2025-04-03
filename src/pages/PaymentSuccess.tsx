@@ -59,7 +59,6 @@ const PaymentSuccess = () => {
 
       const data = await response.json();
       setFileUrl(data.fileUrl);
-      alert("File uploaded successfully!");
     } catch (error: any) {
       console.error("Upload error:", error);
       alert("Upload failed: " + error.message);
@@ -80,8 +79,6 @@ const PaymentSuccess = () => {
         },
         body: JSON.stringify(updatedFormData),
       });
-      sessionStorage.setItem("isSuccess", "false");
-      sessionStorage.setItem("step", "1");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form.");
@@ -89,6 +86,12 @@ const PaymentSuccess = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loading) return;
+    sessionStorage.setItem("isSuccess", "false");
+    sessionStorage.setItem("step", "1");
+  }, [loading]);
 
   const isSuccess = sessionStorage.getItem("isSuccess");
 
@@ -113,7 +116,7 @@ const PaymentSuccess = () => {
     <div>
       {loading ? (
         <div className="h-screen flex justify-center items-center">
-          <Loader color="blue" size="xl" type="dots" />
+          <Loader color="#45bda6" size="xl" type="dots" />
         </div>
       ) : (
         <div>
