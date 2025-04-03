@@ -4,7 +4,6 @@ import { Loader } from "@mantine/core";
 
 const PaymentSuccess = () => {
   const { formData, setFormData } = useContext(AppContext);
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
@@ -58,8 +57,6 @@ const PaymentSuccess = () => {
       }
 
       const data = await response.json();
-      console.log(data, "===data===");
-      setFileUrl(data.fileUrl);
       return data.fileUrl;
     } catch (error: any) {
       console.error("Upload error:", error);
@@ -71,13 +68,7 @@ const PaymentSuccess = () => {
 
     setLoading(true);
     try {
-      const Data = await handleUpload();
-      console.log(Data, "====DATA+=====");
-      if (!fileUrl) {
-        console.log(fileUrl, "====fileUrl====");
-        return;
-      }
-      console.log(fileUrl, "====fileUrl====");
+      const fileUrl = await handleUpload();
       const updatedFormData = { ...formData, logo: fileUrl };
       console.log(updatedFormData, "===updatedFormData===");
       await fetch(scriptURL, {
@@ -117,7 +108,7 @@ const PaymentSuccess = () => {
     } else {
       sendData();
     }
-  }, [isSuccess, setFormData, sendData, fileUrl]);
+  }, [isSuccess, setFormData, sendData]);
 
   return (
     <div>
