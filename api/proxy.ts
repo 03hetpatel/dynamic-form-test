@@ -1,6 +1,9 @@
 // api/proxy.js
 
 export default async function handler(req, res) {
+  // Log method and headers for debugging
+  console.log("Incoming request:", req.method, req.headers);
+
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -21,6 +24,7 @@ export default async function handler(req, res) {
       req.on("end", () => resolve(data));
       req.on("error", (err) => reject(err));
     });
+    console.log("Raw body:", rawBody);
   } catch (err) {
     console.error("Error reading request body:", err);
     res.status(400).json({ error: "Error reading request body" });
@@ -30,6 +34,7 @@ export default async function handler(req, res) {
   let parsedBody;
   try {
     parsedBody = JSON.parse(rawBody);
+    console.log("Parsed body:", parsedBody);
   } catch (err) {
     console.error("Invalid JSON:", err);
     res.status(400).json({ error: "Invalid JSON" });
@@ -52,7 +57,7 @@ export default async function handler(req, res) {
     const textData = await response.text();
     console.log("Response from Apps Script:", textData);
 
-    // Forward the response with CORS headers
+    // Add the CORS header and return the response from Apps Script
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(response.status).send(textData);
   } catch (error) {
