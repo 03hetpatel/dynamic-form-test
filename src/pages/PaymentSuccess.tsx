@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "../context/AppContext";
+import { Loader } from "@mantine/core";
 
 const PaymentSuccess = () => {
   const { formData, setFormData } = useContext(AppContext);
@@ -70,6 +71,7 @@ const PaymentSuccess = () => {
     try {
       await handleUpload(); // Call the upload function before sending data
       const updatedFormData = { ...formData, logo: fileUrl };
+      console.log(updatedFormData, "===updatedFormData===");
       await fetch(scriptURL, {
         method: "POST",
         mode: "no-cors", // Prevents CORS errors
@@ -107,20 +109,26 @@ const PaymentSuccess = () => {
 
   return !isSuccess || isSuccess === "false" ? (
     <div>Wait...</div>
-  ) : loading ? (
-    <div>Loading</div>
   ) : (
     <div>
-      <img
-        className="h-screen w-full object-cover max-[700px]:hidden"
-        src="./payment_success_desktop.jpg"
-        alt=""
-      />
-      <img
-        className="h-screen w-full object-cover min-[700px]:hidden"
-        src="./payment_success_mobile.jpg"
-        alt=""
-      />
+      {loading ? (
+        <div className="h-screen flex justify-center items-center">
+          <Loader color="blue" size="xl" type="dots" />
+        </div>
+      ) : (
+        <div>
+          <img
+            className="h-screen w-full object-cover max-[700px]:hidden"
+            src="./payment_success_desktop.jpg"
+            alt=""
+          />
+          <img
+            className="h-screen w-full object-cover min-[700px]:hidden"
+            src="./payment_success_mobile.jpg"
+            alt=""
+          />
+        </div>
+      )}
     </div>
   );
 };
