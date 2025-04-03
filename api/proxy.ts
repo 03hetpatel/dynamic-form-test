@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Manually parse the request body
+  // Manually read the request body
   let rawBody = "";
   try {
     rawBody = await new Promise((resolve, reject) => {
@@ -18,14 +18,11 @@ export default async function handler(req, res) {
       req.on("data", (chunk) => {
         data += chunk;
       });
-      req.on("end", () => {
-        resolve(data);
-      });
-      req.on("error", (err) => {
-        reject(err);
-      });
+      req.on("end", () => resolve(data));
+      req.on("error", (err) => reject(err));
     });
   } catch (err) {
+    console.error("Error reading request body:", err);
     res.status(400).json({ error: "Error reading request body" });
     return;
   }
@@ -34,29 +31,32 @@ export default async function handler(req, res) {
   try {
     parsedBody = JSON.parse(rawBody);
   } catch (err) {
+    console.error("Invalid JSON:", err);
     res.status(400).json({ error: "Invalid JSON" });
     return;
   }
 
-  // Forward the request to your Apps Script endpoint
   const deployedUrl =
     "https://script.google.com/macros/s/AKfycbzyclRmJ9UWEPjWa5Yspe_5J8fOhwKDwszpm2jBLyrdM5M8RBxEgI8shqtW2z-WU7KPgA/exec";
 
   try {
+    console.log("Forwarding request to Apps Script endpoint:", deployedUrl);
     const response = await fetch(deployedUrl, {
-      method: "POST", // Always use POST for the upload
+      method: "POST", // Always forward as POST
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(parsedBody),
     });
 
-    const data = await response.text();
+    const textData = await response.text();
+    console.log("Response from Apps Script:", textData);
 
-    // Pass along the CORS header
+    // Forward the response with CORS headers
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.status(response.status).send(data);
+    res.status(response.status).send(textData);
   } catch (error) {
+    console.error("Error forwarding request:", error);
     res.status(500).json({ error: error.message });
   }
 }
