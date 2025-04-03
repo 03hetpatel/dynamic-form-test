@@ -67,14 +67,15 @@ const PaymentSuccess = () => {
   };
   const sendData = async () => {
     const scriptURL = import.meta.env.VITE_SCRIPT_URI;
-    if (!fileUrl) {
-      alert("File URL is not available. Please upload a file first.");
-      return;
-    }
+
     setLoading(true);
-    console.log(fileUrl, "====fileUrl====");
     try {
       await handleUpload(); // Call the upload function before sending data
+      if (!fileUrl) {
+        console.log(fileUrl, "====fileUrl====");
+        return;
+      }
+      console.log(fileUrl, "====fileUrl====");
       const updatedFormData = { ...formData, logo: fileUrl };
       console.log(updatedFormData, "===updatedFormData===");
       await fetch(scriptURL, {
