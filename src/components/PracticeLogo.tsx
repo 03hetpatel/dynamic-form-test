@@ -9,13 +9,34 @@ import useInputChange from "../hooks/useInputChange";
 
 const PracticeLogo: React.FC = () => {
   const { setStep, formData } = useContext(AppContext);
+
   const handleInputChange = useInputChange();
   const [selectedFile, setSelectedFile] = useState<File | null>(
-    formData?.logo || null
+    formData.logo ?? null
   );
-  const [fileUrl, setFileUrl] = useState("");
 
-  console.log(fileUrl, "====fileUrl");
+  const handleDrop = (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setSelectedFile(file);
+      // Read the file as a data URL so we can store it
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result as string;
+        // Store an object with both file meta and base64 data
+        const fileData = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          lastModified: file.lastModified,
+          dataUrl, // base64 representation
+        };
+        // Save this object using your context's input change handler.
+        handleInputChange("logo", fileData);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleUpload = async () => {
     if (!selectedFile) {
@@ -48,7 +69,7 @@ const PracticeLogo: React.FC = () => {
           }
 
           const data = await response.json();
-          setFileUrl(data.fileUrl);
+          console.log(data.fileUrl);
           alert("File uploaded successfully!");
         } catch (error: any) {
           console.error("Upload error:", error);
@@ -63,14 +84,8 @@ const PracticeLogo: React.FC = () => {
       <div className="px-10">
         <Heading text="Upload your Practice Logo" />
         <div className="mb-5">
-          <Dropzone
-            onDrop={(files: File[]) => {
-              if (files.length > 0) {
-                setSelectedFile(files[0]);
-                handleInputChange("logo", files);
-              }
-            }}
-          >
+          <button onClick={handleUpload}>Upload</button>
+          <Dropzone onDrop={handleDrop}>
             <div className="md:flex grid items-center justify-between gap-5 py-5">
               <div className="flex items-center gap-3">
                 <AiOutlineCloudUpload size={60} className="text-[#45bda6]" />
@@ -95,21 +110,6 @@ const PracticeLogo: React.FC = () => {
               </div>
             </div>
           </Dropzone>
-
-          <button className="cursor-pointer" onClick={handleUpload}>
-            Upload
-          </button>
-
-          {/* {fileUrl && (
-            <div>
-              <p>
-                File uploaded successfully!{" "}
-                <a href={fileUrl} target="_blank" rel="noopener noreferrer">
-                  View File
-                </a>
-              </p>
-            </div>
-          )} */}
         </div>
       </div>
       <Footer

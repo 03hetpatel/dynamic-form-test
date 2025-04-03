@@ -1,26 +1,74 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "../context/AppContext";
 
 const PaymentSuccess = () => {
   const { formData, setFormData } = useContext(AppContext);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleUpload = async () => {
+    const selectedFile = formData.logo;
+    if (!selectedFile) {
+      alert("Please select a file");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = async () => {
+      if (typeof reader.result === "string") {
+        const base64File = reader.result.split(",")[1]; // Extract base64 content
+        const requestBody = {
+          filename: selectedFile.name,
+          mimetype: selectedFile.type,
+          fileData: base64File,
+        };
+
+        try {
+          const response = await fetch("/api/proxy", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          setFileUrl(data.fileUrl);
+          alert("File uploaded successfully!");
+        } catch (error: any) {
+          console.error("Upload error:", error);
+          alert("Upload failed: " + error.message);
+        }
+      }
+    };
+  };
 
   const sendData = async () => {
     const scriptURL = import.meta.env.VITE_SCRIPT_URI;
-
+    setLoading(true);
     try {
+      await handleUpload(); // Call the upload function before sending data
+      const updatedFormData = { ...formData, logo: fileUrl };
       await fetch(scriptURL, {
         method: "POST",
         mode: "no-cors", // Prevents CORS errors
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
       sessionStorage.setItem("isSuccess", "false");
       sessionStorage.setItem("step", "1");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +91,8 @@ const PaymentSuccess = () => {
 
   return !isSuccess || isSuccess === "false" ? (
     <div>Wait...</div>
+  ) : loading ? (
+    <div>Loading</div>
   ) : (
     <div>
       <img
