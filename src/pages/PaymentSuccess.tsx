@@ -58,6 +58,7 @@ const PaymentSuccess = () => {
       }
 
       const data = await response.json();
+      console.log(data, "===data===");
       setFileUrl(data.fileUrl);
     } catch (error: any) {
       console.error("Upload error:", error);
@@ -67,6 +68,7 @@ const PaymentSuccess = () => {
   const sendData = async () => {
     const scriptURL = import.meta.env.VITE_SCRIPT_URI;
     setLoading(true);
+    console.log(fileUrl, "====fileUrl====");
     try {
       await handleUpload(); // Call the upload function before sending data
       const updatedFormData = { ...formData, logo: fileUrl };
