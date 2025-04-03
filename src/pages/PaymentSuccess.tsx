@@ -64,7 +64,6 @@ const PaymentSuccess = () => {
   };
 
   useEffect(() => {
-    console.log("check=========");
     const sendData = async () => {
       const scriptURL = import.meta.env.VITE_SCRIPT_URI;
       try {
@@ -92,9 +91,10 @@ const PaymentSuccess = () => {
       } finally {
         setLoading(false);
       }
-
-      sendData();
     };
+
+    // Call the sendData function once the component mounts
+    sendData();
   }, []);
 
   if (loading) {
