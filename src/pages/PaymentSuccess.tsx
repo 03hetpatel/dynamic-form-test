@@ -70,6 +70,7 @@ const PaymentSuccess = () => {
       const scriptURL = import.meta.env.VITE_SCRIPT_URI; // your Apps Script URL
       try {
         const fileUrl = await handleUpload();
+        console.log(fileUrl, "===fileUrl");
         if (!fileUrl) return;
         const updatedFormData = { ...formData, logo: fileUrl };
         console.log("Updated Form Data:", updatedFormData);
