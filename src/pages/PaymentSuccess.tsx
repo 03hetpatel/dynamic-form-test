@@ -60,6 +60,7 @@ const PaymentSuccess = () => {
       const data = await response.json();
       console.log(data, "===data===");
       setFileUrl(data.fileUrl);
+      return data.fileUrl;
     } catch (error: any) {
       console.error("Upload error:", error);
       alert("Upload failed: " + error.message);
@@ -70,7 +71,8 @@ const PaymentSuccess = () => {
 
     setLoading(true);
     try {
-      await handleUpload(); // Call the upload function before sending data
+      const Data = await handleUpload();
+      console.log(Data, "====DATA+=====");
       if (!fileUrl) {
         console.log(fileUrl, "====fileUrl====");
         return;
