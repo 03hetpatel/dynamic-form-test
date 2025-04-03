@@ -106,6 +106,13 @@ const PaymentSuccess = () => {
     }
   }, [isSuccess, setFormData, sendData]);
 
+  if (!isSuccess || isSuccess === "false") {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader color="#45bda6" size="xl" type="dots" />
+      </div>
+    );
+  }
   return (
     <div>
       {loading ? (
