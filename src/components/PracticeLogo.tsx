@@ -6,6 +6,7 @@ import Footer from "../common/Footer";
 import Heading from "../common/Heading";
 import AppContext from "../context/AppContext";
 import useInputChange from "../hooks/useInputChange";
+import { showToast } from "../common/toast";
 
 interface StoredFileData {
   name: string;
@@ -88,7 +89,13 @@ const PracticeLogo: React.FC = () => {
         </div>
       </div>
       <Footer
-        handleNextStep={() => setStep(3)}
+        handleNextStep={() => {
+          if (!selectedFile) {
+            showToast("Please upload a logo before proceeding.", "error");
+            return;
+          }
+          setStep(3);
+        }}
         handlePreviousStep={() => setStep(1)}
       />
     </div>

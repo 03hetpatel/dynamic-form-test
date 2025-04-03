@@ -67,6 +67,10 @@ const PaymentSuccess = () => {
   };
   const sendData = async () => {
     const scriptURL = import.meta.env.VITE_SCRIPT_URI;
+    if (!fileUrl) {
+      alert("File URL is not available. Please upload a file first.");
+      return;
+    }
     setLoading(true);
     console.log(fileUrl, "====fileUrl====");
     try {
@@ -89,11 +93,11 @@ const PaymentSuccess = () => {
     }
   };
 
-  useEffect(() => {
-    if (loading) return;
-    sessionStorage.setItem("isSuccess", "false");
-    sessionStorage.setItem("step", "1");
-  }, [loading]);
+  // useEffect(() => {
+  //   if (loading) return;
+  //   sessionStorage.setItem("isSuccess", "false");
+  //   sessionStorage.setItem("step", "1");
+  // }, [loading]);
 
   const isSuccess = sessionStorage.getItem("isSuccess");
 
@@ -110,11 +114,9 @@ const PaymentSuccess = () => {
     } else {
       sendData();
     }
-  }, [isSuccess, setFormData, sendData]);
+  }, [isSuccess, setFormData, sendData, fileUrl]);
 
-  return !isSuccess || isSuccess === "false" ? (
-    <div>Wait...</div>
-  ) : (
+  return (
     <div>
       {loading ? (
         <div className="h-screen flex justify-center items-center">
