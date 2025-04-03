@@ -64,10 +64,9 @@ const PaymentSuccess = () => {
   };
 
   useEffect(() => {
-    // Read the success flag from session storage
-    // If payment was successful, send the form data.
+    console.log("check=========");
     const sendData = async () => {
-      const scriptURL = import.meta.env.VITE_SCRIPT_URI; // your Apps Script URL
+      const scriptURL = import.meta.env.VITE_SCRIPT_URI;
       try {
         const fileUrl = await handleUpload();
         console.log(fileUrl, "===fileUrl");
@@ -76,18 +75,17 @@ const PaymentSuccess = () => {
         console.log("Updated Form Data:", updatedFormData);
         await fetch(scriptURL, {
           method: "POST",
-          mode: "no-cors", // Using no-cors because of Apps Script restrictions
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedFormData),
         });
-        // Mark success as handled and redirect if needed.
         sessionStorage.setItem("isSuccess", "false");
         sessionStorage.setItem("step", "1");
         setFormData({});
         sessionStorage.clear();
-        window.location.href = "/success"; // Redirect to a confirmation page
+        window.location.href = "/success";
       } catch (error) {
         console.error("Error submitting form:", error);
         alert("Error submitting form.");
@@ -97,7 +95,7 @@ const PaymentSuccess = () => {
 
       sendData();
     };
-  }, [formData, setFormData]);
+  }, []);
 
   if (loading) {
     return (
