@@ -65,44 +65,37 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     // Read the success flag from session storage
-    const isSuccess = sessionStorage.getItem("isSuccess");
-
-    if (isSuccess !== "true") {
-      // If payment wasn't successful, clear data and redirect to onboarding.
-      setFormData({});
-      sessionStorage.clear();
-      window.location.href = "/brite-pracice-onboarding";
-    } else {
-      // If payment was successful, send the form data.
-      const sendData = async () => {
-        const scriptURL = import.meta.env.VITE_SCRIPT_URI; // your Apps Script URL
-        try {
-          const fileUrl = await handleUpload();
-          if (!fileUrl) return;
-          const updatedFormData = { ...formData, logo: fileUrl };
-          console.log("Updated Form Data:", updatedFormData);
-          await fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors", // Using no-cors because of Apps Script restrictions
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedFormData),
-          });
-          // Mark success as handled and redirect if needed.
-          sessionStorage.setItem("isSuccess", "false");
-          sessionStorage.setItem("step", "1");
-          window.location.href = "/confirmation"; // Redirect to a confirmation page
-        } catch (error) {
-          console.error("Error submitting form:", error);
-          alert("Error submitting form.");
-        } finally {
-          setLoading(false);
-        }
-      };
+    // If payment was successful, send the form data.
+    const sendData = async () => {
+      const scriptURL = import.meta.env.VITE_SCRIPT_URI; // your Apps Script URL
+      try {
+        const fileUrl = await handleUpload();
+        if (!fileUrl) return;
+        const updatedFormData = { ...formData, logo: fileUrl };
+        console.log("Updated Form Data:", updatedFormData);
+        await fetch(scriptURL, {
+          method: "POST",
+          mode: "no-cors", // Using no-cors because of Apps Script restrictions
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        });
+        // Mark success as handled and redirect if needed.
+        sessionStorage.setItem("isSuccess", "false");
+        sessionStorage.setItem("step", "1");
+        setFormData({});
+        sessionStorage.clear();
+        window.location.href = "/success"; // Redirect to a confirmation page
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("Error submitting form.");
+      } finally {
+        setLoading(false);
+      }
 
       sendData();
-    }
+    };
   }, [formData, setFormData]);
 
   if (loading) {

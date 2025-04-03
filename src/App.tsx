@@ -5,6 +5,7 @@ import AppContext from "./context/AppContext";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import Success from "./pages/Success";
 
 const App = () => {
   const [step, setStep] = useState(() => {
@@ -16,7 +17,7 @@ const App = () => {
     return savedFormData ? JSON.parse(savedFormData) : {};
   });
 
-  console.log(formData,'===formData===')
+  console.log(formData, "===formData===");
   useEffect(() => {
     sessionStorage.setItem("step", String(step));
   }, [step]);
@@ -30,6 +31,7 @@ const App = () => {
       <Routes>
         <Route path="/brite-pracice-onboarding" element={<Form />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/success" element={<Success />} />
         <Route path="*" element={<Navigate to="/brite-pracice-onboarding" />} />
       </Routes>
       <ToastContainer
