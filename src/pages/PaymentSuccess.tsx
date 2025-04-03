@@ -79,6 +79,8 @@ const PaymentSuccess = () => {
         },
         body: JSON.stringify(updatedFormData),
       });
+      sessionStorage.setItem("isSuccess", "false");
+      sessionStorage.setItem("step", "1");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form.");
@@ -86,12 +88,6 @@ const PaymentSuccess = () => {
       setLoading(false);
     }
   };
-
-  // useEffect(() => {
-  //   if (loading) return;
-  //   sessionStorage.setItem("isSuccess", "false");
-  //   sessionStorage.setItem("step", "1");
-  // }, [loading]);
 
   const isSuccess = sessionStorage.getItem("isSuccess");
 
