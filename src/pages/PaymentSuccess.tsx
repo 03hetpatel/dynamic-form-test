@@ -7,47 +7,63 @@ const PaymentSuccess = () => {
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
-    const selectedFile = formData.logo;
+    const selectedFile = formData.logo; // Assuming logo is the file input in formData
     if (!selectedFile) {
       alert("Please select a file");
       return;
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onload = async () => {
-      if (typeof reader.result === "string") {
-        const base64File = reader.result.split(",")[1]; // Extract base64 content
-        const requestBody = {
-          filename: selectedFile.name,
-          mimetype: selectedFile.type,
-          fileData: base64File,
-        };
-
-        try {
-          const response = await fetch("/api/proxy", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    let base64File = "";
+    // Check if selectedFile is a File (Blob) or our stored object.
+    if (selectedFile instanceof File) {
+      // If it's a File, use FileReader to get the data URL.
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      base64File = await new Promise<string>((resolve, reject) => {
+        reader.onload = () => {
+          if (typeof reader.result === "string") {
+            resolve(reader.result.split(",")[1]); // Extract base64 content
+          } else {
+            reject("Failed to read file as data URL");
           }
+        };
+        reader.onerror = reject;
+      });
+    } else if ("dataUrl" in selectedFile) {
+      // If it's our stored file data, extract base64 content directly.
+      base64File = selectedFile.dataUrl.split(",")[1];
+    } else {
+      alert("Invalid file object");
+      return;
+    }
 
-          const data = await response.json();
-          setFileUrl(data.fileUrl);
-          alert("File uploaded successfully!");
-        } catch (error: any) {
-          console.error("Upload error:", error);
-          alert("Upload failed: " + error.message);
-        }
-      }
+    const requestBody = {
+      filename: typeof selectedFile === "object" ? selectedFile.name : "",
+      mimetype: typeof selectedFile === "object" ? selectedFile.type : "",
+      fileData: base64File,
     };
-  };
 
+    try {
+      const response = await fetch("/api/proxy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setFileUrl(data.fileUrl);
+      alert("File uploaded successfully!");
+    } catch (error: any) {
+      console.error("Upload error:", error);
+      alert("Upload failed: " + error.message);
+    }
+  };
   const sendData = async () => {
     const scriptURL = import.meta.env.VITE_SCRIPT_URI;
     setLoading(true);

@@ -47,64 +47,6 @@ const PracticeLogo: React.FC = () => {
     }
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      alert("Please select a file");
-      return;
-    }
-
-    let base64File = "";
-    // Check if selectedFile is a File (Blob) or our stored object.
-    if (selectedFile instanceof File) {
-      // If it's a File, use FileReader to get the data URL.
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      base64File = await new Promise<string>((resolve, reject) => {
-        reader.onload = () => {
-          if (typeof reader.result === "string") {
-            resolve(reader.result.split(",")[1]); // Extract base64 content
-          } else {
-            reject("Failed to read file as data URL");
-          }
-        };
-        reader.onerror = reject;
-      });
-    } else if ("dataUrl" in selectedFile) {
-      // If it's our stored file data, extract base64 content directly.
-      base64File = selectedFile.dataUrl.split(",")[1];
-    } else {
-      alert("Invalid file object");
-      return;
-    }
-
-    const requestBody = {
-      filename: typeof selectedFile === "object" ? selectedFile.name : "",
-      mimetype: typeof selectedFile === "object" ? selectedFile.type : "",
-      fileData: base64File,
-    };
-
-    try {
-      const response = await fetch("/api/proxy", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data.fileUrl);
-      alert("File uploaded successfully!");
-    } catch (error: any) {
-      console.error("Upload error:", error);
-      alert("Upload failed: " + error.message);
-    }
-  };
-
   return (
     <div className="container-home bg-main">
       <div className="px-10">
@@ -134,7 +76,9 @@ const PracticeLogo: React.FC = () => {
                 <div>
                   {selectedFile
                     ? "name" in selectedFile
-                      ? selectedFile.name
+                      ? selectedFile.name.length > 30
+                        ? `${selectedFile.name.substring(0, 30)}...`
+                        : selectedFile.name
                       : ""
                     : "No file selected"}
                 </div>
@@ -142,7 +86,6 @@ const PracticeLogo: React.FC = () => {
             </div>
           </Dropzone>
         </div>
-        <button onClick={handleUpload}>Upload</button>
       </div>
       <Footer
         handleNextStep={() => setStep(3)}

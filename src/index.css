@@ -152,7 +152,9 @@
   color: black !important;
   margin-top: 0px !important;
 }
-
+.mantine-TextInput-label{
+  color: black !important;
+}
 .mantine-Input-input,.mantine-TextInput-input {
   background-color: #e5e7ea !important;
 }
