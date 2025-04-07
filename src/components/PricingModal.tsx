@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Footer from "../common/Footer";
 import Heading from "../common/Heading";
 import AppContext from "../context/AppContext";
+import { showToast } from "../common/toast";
 
 const PricingModal = () => {
   const { setStep } = useContext(AppContext);
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <div className="container-home bg-main">
       <div className="px-10 max-[450px]:px-3">
@@ -149,12 +152,32 @@ const PricingModal = () => {
                 </div>
               </div>
             </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="checkbox"
+                className="cursor-pointer mt-1"
+                checked={isChecked}
+                onChange={() => {
+                  setIsChecked(!isChecked);
+                }}
+              />
+              <label htmlFor="checkbox" className="ml-2 mt-1 cursor-pointer">
+                Please acknowledge that you’ve read and understood the pricing
+                structure above.
+              </label>
+            </div>
           </div>
         </div>
       </div>
       <Footer
         handleNextStep={() => {
-          setStep(13);
+          isChecked
+            ? setStep(13)
+            : showToast(
+                "Please acknowledge that you’ve read and understood the pricing structure above.",
+                "error"
+              );
         }}
         handlePreviousStep={() => {
           setStep(11);
