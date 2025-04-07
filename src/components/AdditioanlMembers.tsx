@@ -125,6 +125,54 @@ const AdditionalMembers = () => {
           );
           firstErrorShown = true;
         }
+      } else if (formData.email === member.email) {
+        memberErrors.email =
+          "you have already used this email for practice email, please enter a unique email for team member";
+        showToast(
+          `you have already used this email for practice email, please enter a unique email for team member ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
+      } else if (
+        formData?.owners?.map((ele: any) => ele.email).includes(member.email)
+      ) {
+        memberErrors.email =
+          "you have already used this email for owner email, please enter a unique email.";
+        showToast(
+          `you have already used this email for owner email, please enter a unique email for team member  ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
+      } else if (
+        formData?.providers?.map((ele: any) => ele.email).includes(member.email)
+      ) {
+        memberErrors.email =
+          "you have already used this email for provider email, please enter a unique email.";
+        showToast(
+          `you have already used this email for provider email, please enter a unique email for team member  ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
+      } else if (
+        (members as IMember[]).some(
+          (p, i) => i !== index && p.email === member.email
+        )
+      ) {
+        memberErrors.email =
+          "You have already used this email for another team member. Please enter a unique email.";
+        showToast(
+          `You have already used this email for another team member. Please enter a unique email for team member ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
       }
 
       // Validate Roles
