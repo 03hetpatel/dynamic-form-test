@@ -82,7 +82,7 @@ const FaxNumber = () => {
             error={errors?.faxNumber || null} // Show error message
             maxLength={14} // Prevents exceeding formatted length
             onChange={handlePhoneChange}
-            placeholder="(XXX)-XXX-XXXX"
+            placeholder="(###) ###-####"
           />
         </div>
       </div>
