@@ -135,6 +135,8 @@ const AdditionalOwner = () => {
           } else if (cleanedPhone.length !== 10) {
             error = "Phone number must be 10 digits.";
           }
+        } else if (formData?.email === value) {
+          error = "Owner email cannot be same as practice email.";
         }
 
         if (error) {
