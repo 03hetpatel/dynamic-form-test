@@ -192,7 +192,7 @@ const MultipleLocations: React.FC = () => {
               ref={(el) => {
                 locationRefs.current[index] = el as HTMLDivElement;
               }}
-              className="p-3 container-card rounded-md my-5"
+              className="p-3 container-card rounded-md my-5 space-y-4"
             >
               {/* <div className="grid max-[450px]:grid-cols-1 grid-cols-2 gap-x-5">
                 <TextInput
