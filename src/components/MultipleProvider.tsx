@@ -139,6 +139,38 @@ const MultipleProvider = () => {
           );
           firstErrorShown = true;
         }
+      } else if (formData.email === provider.email) {
+        providerErrors.email =
+          "you have already used this email for practice email, please enter a unique email.";
+        showToast(
+          `you have already used this email for practice email, please enter a unique email for provider ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
+      } else if (
+        formData?.owners?.map((ele: any) => ele.email).includes(provider.email)
+      ) {
+        providerErrors.email =
+          "you have already used this email for owner email, please enter a unique email.";
+        showToast(
+          `you have already used this email for owner email, please enter a unique email for provider ${
+            index + 1
+          }`,
+          "error"
+        );
+        firstErrorShown = true;
+      } else if (
+        (providers as IProvider[]).some((p, i) => i !== index && p.email === provider.email)
+      ) {
+        providerErrors.email =
+          "You have already used this email for another provider. Please enter a unique email.";
+        showToast(
+          `You have already used this email for another provider. Please enter a unique email for Provider ${index + 1}`,
+          "error"
+        );
+        firstErrorShown = true;
       } else if (!emailRegex.test(provider.email)) {
         providerErrors.email = "Enter a valid email address.";
 
