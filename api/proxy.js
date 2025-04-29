@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   }
 
   const deployedUrl =
-    "https://script.google.com/macros/s/AKfycbzyclRmJ9UWEPjWa5Yspe_5J8fOhwKDwszpm2jBLyrdM5M8RBxEgI8shqtW2z-WU7KPgA/exec";
+    "https://script.google.com/macros/s/AKfycbzdf79iyxw0ulQszffnRQg3Yq5bO5AuEyIcgQ6P4CwCkc00YXfV1XuHuE8OU3wEmnJw/exec";
 
   try {
     console.log("Forwarding request to Apps Script endpoint:", deployedUrl);
