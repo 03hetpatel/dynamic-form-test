@@ -53,7 +53,9 @@ const PracticeLogo: React.FC = () => {
       <div className="px-10">
         <Heading text="Upload your Practice Logo" />
         <div className="mb-5">
-          <Dropzone onDrop={handleDrop}>
+          <Dropzone onDrop={handleDrop} accept={{
+    'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'],
+  }}>
             <div className="md:flex grid items-center justify-between gap-5 py-5">
               <div className="flex items-center gap-3">
                 <AiOutlineCloudUpload size={60} className="text-[#45bda6]" />
