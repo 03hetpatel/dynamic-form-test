@@ -15,9 +15,9 @@ const OperationHubMessage = () => {
         </div>
         <div className="max-h-[calc(100vh-450px)] overflow-auto rounded-md space-y-2 max-[450px]:px-5 px-10 mb-10">
           <div>
-            The Operations Hub is your practice’s all-in-one portal (its
-            separate from provider portal) for managing daily operations
-            including:
+            The Operations Hub is your practice’s all-in-one portal (and is
+            separate from your provider portal). It's here to help you manage
+            the daily operations including
           </div>
           <div>
             <div className="flex items-center gap-2">

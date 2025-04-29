@@ -21,9 +21,10 @@ const Hormone = () => {
       <div className="px-10 max-[450px]:px-3">
         <Heading text="In addition to hormones, what will your practice pay for?" />
         <div className="text-base max-[450px]:text-sm text-center pb-3 text-color">
-          Since you selected 'I have team members', enter the details of your
-          team members who will need access to the Operations Hub. Click '+ Add
-          More Member(s)' to include additional team members as needed.
+          This will set your default shipping preference (Practice or Patients).
+          A new feature is coming soon that will let you update this default or
+          change it per order—but for now, your selection will be saved as
+          permanent.
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <button
@@ -70,7 +71,7 @@ const Hormone = () => {
                 : ""
             } cursor-pointer rounded-xl sm:text-sm add-button py-2 !font-bold !min-h-[52px] !mb-5 max-[450px]:!px-5 md:mt-5 max-[450px]:!text-sm max-[450px]:!min-h-[40px]`}
           >
-            Neither (Patient Pays for Everything)
+            Neither (Patient pays for both shipping and other medications)
           </button>
         </div>
       </div>

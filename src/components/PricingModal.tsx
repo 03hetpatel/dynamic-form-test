@@ -107,7 +107,7 @@ const PricingModal = () => {
                 </div>
                 <div>
                   <div>
-                    <strong>SPS Priority (3-5 day delivery): </strong>
+                    <strong>USPS Priority (3-5 day delivery): </strong>
                     <span>$14.95</span>
                   </div>
                   <div>
