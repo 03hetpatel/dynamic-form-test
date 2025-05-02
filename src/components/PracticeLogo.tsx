@@ -90,9 +90,10 @@ const PracticeLogo: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="text-red-500">
+            <div className="text-red-500 text-sm">
               Only image files (PNG, JPG, JPEG) are accepted. If your logo is in
-              a PDF or other format, please take a screenshot and upload it here
+              a PDF or other format, please take a screenshot and
+              upload it here.
             </div>
           </Dropzone>
         </div>
