@@ -1,5 +1,4 @@
 import { TextInput } from "@mantine/core";
-import Heading from "../common/Heading";
 import useInputChange from "../hooks/useInputChange";
 import { ChangeEvent, useContext } from "react";
 import AppContext from "../context/AppContext";
@@ -44,7 +43,7 @@ const FaxNumber = () => {
 
     if (cleaned.length >= 7) {
       return `(${cleaned.slice(0, 3)})-${cleaned.slice(3, 6)}-${cleaned.slice(
-        6
+        6,
       )}`;
     } else if (cleaned.length >= 4) {
       return `(${cleaned.slice(0, 3)})-${cleaned.slice(3)}`;
@@ -74,9 +73,9 @@ const FaxNumber = () => {
   return (
     <div className="container-home bg-main">
       <div className="px-10">
-            <div className="text-center max-[450px]:text-lg text-2xl font-bold p-2 max-[450px]:p-2 text-color">
-              Fax Number
-            </div>
+        <div className="text-center max-[450px]:text-lg text-2xl font-bold p-2 max-[450px]:p-2 text-color">
+          Fax Number
+        </div>
         <div className="text-white text-sm text-center mb-4">
           This field is optional. If you have a fax number, you can enter it
           here — otherwise, feel free to skip.

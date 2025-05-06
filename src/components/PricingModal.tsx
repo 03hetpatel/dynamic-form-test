@@ -176,7 +176,7 @@ const PricingModal = () => {
             ? setStep(13)
             : showToast(
                 "Please acknowledge that you’ve read and understood the pricing structure above.",
-                "error"
+                "error",
               );
         }}
         handlePreviousStep={() => {
