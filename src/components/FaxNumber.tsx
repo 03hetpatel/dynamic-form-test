@@ -22,7 +22,7 @@ const FaxNumber = () => {
 
   const validationRules = {
     faxNumber: {
-      required: true,
+      // required: true,
       message: "Enter a valid fax number.",
       pattern: {
         value: /^\d{10}$/, // Ensures exactly 10 digits
@@ -74,7 +74,13 @@ const FaxNumber = () => {
   return (
     <div className="container-home bg-main">
       <div className="px-10">
-        <Heading text="Fax Number" />
+            <div className="text-center max-[450px]:text-lg text-2xl font-bold p-2 max-[450px]:p-2 text-color">
+              Fax Number
+            </div>
+        <div className="text-white text-sm text-center mb-4">
+          This field is optional. If you have a fax number, you can enter it
+          here — otherwise, feel free to skip.
+        </div>
         <div className="mb-5">
           <TextInput
             type="text"

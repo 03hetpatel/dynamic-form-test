@@ -74,7 +74,7 @@ const PricingModal = () => {
                 <div className="grid grid-cols-3 justify-center text-center">
                   <div>
                     <div className="font-bold sm:text-lg">Hormone</div>
-                    <div className="pt-2">Hormone</div>
+                    <div className="pt-2">Testosterone</div>
                   </div>
                   <div>
                     <div className="font-bold sm:text-lg">Monthly</div>
